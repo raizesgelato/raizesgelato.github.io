@@ -1,8 +1,10 @@
 :root {
   --bg: #f3f1e8;
   --bg-soft: #fcf8f3;
-  --text: #5b4636;
-  --text-soft: #7a6552;
+  /* --text: #5b4636;
+  --text-soft: #7a6552; */
+    --text: #223554;
+  --text-soft: #51678e(--text-soft);
   --navy: #1f3a5f;
   --line: #eadfce;
   --line-dark: rgba(255,255,255,0.75);
@@ -153,6 +155,10 @@ a { color: inherit; text-decoration: none; }
   color: #7a6552;
 }
 
+ .sabores-section {
+    padding-bottom: 80px;
+  }
+
 @media (max-width: 1099px) {
   .sabor-card {
     flex: 0 0 calc((100% - 32px) / 2);
@@ -206,11 +212,11 @@ a { color: inherit; text-decoration: none; }
 .button-primary:hover { opacity: 0.9; }
 .button-outline,
 .button-secondary {
-  border: 1px solid #cbb39a;
+  border: 1px solid #7b8494;
   background: transparent;
 }
 .button-outline:hover,
-.button-secondary:hover { background: #efe3d3; }
+.button-secondary:hover { background: #e4e4e4; }
 
 .hero,
 .easter-grid,
@@ -358,7 +364,7 @@ a { color: inherit; text-decoration: none; }
 .section-copy { color: var(--text-soft); }
 .intro-text p { margin: 0 0 18px; }
 
-.section-light { padding: 88px 0; position: relative; overflow: hidden; }
+.section-light { padding: 80px 0 0 0 ; position: relative; overflow: hidden; }
 .section-navy {
   background: var(--navy);
   color: white;
@@ -376,7 +382,7 @@ a { color: inherit; text-decoration: none; }
 }
 .section-pattern-top::before {
   inset: 0;
-  background-image: url('assets/pattern-raizes.jpeg');
+  /* background-image: url('assets/pattern-raizes.jpeg'); */
   background-size: 720px auto;
   background-repeat: repeat;
   opacity: 0.07;
@@ -394,7 +400,7 @@ a { color: inherit; text-decoration: none; }
   right: 0;
   bottom: 0;
   height: 74px;
-  background: url('assets/pattern-raizes.jpeg') center/contain repeat;
+  /* background: url('assets/pattern-raizes.jpeg') center/contain repeat; */
   opacity: 0.08;
 }
 .pattern-soft-right::after,
@@ -460,6 +466,10 @@ a { color: inherit; text-decoration: none; }
   object-position: center;
 }
 
+#ingredientes{
+  padding: 80px;
+}
+
 .badge {
   position: absolute;
   top: 20px;
@@ -488,7 +498,7 @@ a { color: inherit; text-decoration: none; }
   position: relative;
   z-index: 1;
 }
-.showcase-copy.light-copy { color: white; }
+.showcase-copy.light-copy { color: white;}
 .showcase-copy .section-title-light { max-width: 760px; margin: 18px 0 34px; }
 .showcase-image {
   display: flex;
@@ -579,6 +589,10 @@ a { color: inherit; text-decoration: none; }
 .card-title-light { margin-top: 10px; }
 .card-copy-light { margin-top: 18px; color: rgba(255,255,255,0.88); max-width: 520px; }
 
+.sustentavel{
+   padding-top: 360px;
+}
+
 .cta-box {
   background: var(--card);
   border: 1px solid var(--line);
@@ -622,11 +636,9 @@ a { color: inherit; text-decoration: none; }
 }
 
 .site-footer {
-  border-top: 1px solid rgba(255,255,255,0.15);
   background: var(--navy);
   background-image: url('assets/pattern-raizes.jpeg');
   background-repeat: repeat;
-  background-size: 860px auto;
   color: white;
 }
 .footer-overlay {
@@ -638,7 +650,7 @@ a { color: inherit; text-decoration: none; }
 }
 .footer-logo {
   margin: 0 auto 20px;
-  width: min(260px, 70vw);
+  width: min(100px, 70vw);
 }
 .footer-inner p {
   margin: 0;
@@ -646,6 +658,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 @media (max-width: 980px) {
+   .hidden-mobile{display: none;}
   .desktop-nav { display: none; }
   .hero,
   .intro-grid,
@@ -671,6 +684,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 @media (max-width: 720px) {
+   .hidden-mobile{display: none;}
   .container { width: min(1120px, calc(100% - 32px)); }
   .header-inner {
     min-height: 78px;
@@ -686,7 +700,7 @@ a { color: inherit; text-decoration: none; }
   .footer-inner,
   .intro-grid { padding-top: 64px; padding-bottom: 64px; }
   .ingredients-box,
-  .cta-box,
+  .cta-box { padding: auto }
   .flavor-card,
   .easter-card { padding: 5px; }
   .instagram-inner a { font-size: 1.1rem; }

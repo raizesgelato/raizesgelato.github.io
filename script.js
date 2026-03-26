@@ -41,7 +41,32 @@ const saboresGelato = [
   {
     nome: 'Pistache',
     desc: 'Cremoso, elegante e marcante, com aquele toque sofisticado que conquista na primeira colherada.',
-    imagem: 'assets/pattern-raizes.jpeg',
+    imagem: 'assets/sabores/pistache-2.png',
+  },
+   {
+    nome: 'Fragola',
+    desc: 'Refrescante, vibrante e cheia de sabor, ideal para quem busca leveza.',
+    imagem: 'assets/sabores/fragola.png',
+  },
+  {
+    nome: 'Doce de Leite',
+    desc: 'Refrescante, vibrante e cheia de sabor, ideal para quem busca leveza.',
+    imagem: 'assets/sabores/doceleite.png',
+  },
+    {
+    nome: 'Mousse de Limão',
+    desc: 'Refrescante, vibrante e cheia de sabor, ideal para quem busca leveza.',
+    imagem: 'assets/sabores/mousse.png',
+  },
+  {
+    nome: 'Maracuja & Amora',
+    desc: 'Refrescante, vibrante e cheia de sabor, ideal para quem busca leveza.',
+    imagem: 'assets/sabores/maracuja.png',
+  },
+    {
+    nome: 'Cocco',
+    desc: 'Refrescante, vibrante e cheia de sabor, ideal para quem busca leveza.',
+    imagem: 'assets/sabores/coco.png',
   },
   {
     nome: 'Chocolate Belga',
@@ -51,7 +76,7 @@ const saboresGelato = [
   {
     nome: 'Fior di Latte',
     desc: 'Delicado, puro e perfeito para destacar a qualidade da base artesanal.',
-    imagem: 'assets/pattern-raizes.jpeg',
+   imagem: 'assets/sabores/pattern-raizes.png',
   },
   {
     nome: 'Choco & Brownie',
@@ -69,22 +94,7 @@ const saboresGelato = [
     imagem: 'assets/pattern-raizes.jpeg',
   },
   {
-    nome: 'Fragola',
-    desc: 'Refrescante, vibrante e cheia de sabor, ideal para quem busca leveza.',
-    imagem: 'assets/pattern-raizes.jpeg',
-  },
-  {
-    nome: 'Doce de Leite',
-    desc: 'Refrescante, vibrante e cheia de sabor, ideal para quem busca leveza.',
-    imagem: 'assets/pattern-raizes.jpeg',
-  },
-  {
     nome: 'Cocada Queimada',
-    desc: 'Refrescante, vibrante e cheia de sabor, ideal para quem busca leveza.',
-    imagem: 'assets/pattern-raizes.jpeg',
-  },
-  {
-    nome: 'Cocco',
     desc: 'Refrescante, vibrante e cheia de sabor, ideal para quem busca leveza.',
     imagem: 'assets/pattern-raizes.jpeg',
   },
@@ -92,17 +102,7 @@ const saboresGelato = [
     nome: 'Biscoff',
     desc: 'Refrescante, vibrante e cheia de sabor, ideal para quem busca leveza.',
     imagem: 'assets/pattern-raizes.jpeg',
-  },
-  {
-    nome: 'Mousse de Limão',
-    desc: 'Refrescante, vibrante e cheia de sabor, ideal para quem busca leveza.',
-    imagem: 'assets/pattern-raizes.jpeg',
-  },
-  {
-    nome: 'Maracuja & Amora',
-    desc: 'Refrescante, vibrante e cheia de sabor, ideal para quem busca leveza.',
-    imagem: 'assets/pattern-raizes.jpeg',
-  },
+  }
   
 ];
 
