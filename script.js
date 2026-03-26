@@ -76,7 +76,7 @@ const saboresGelato = [
   {
     nome: 'Fior di Latte',
     desc: 'Gelato de Leite',
-   imagem: 'assets/sabores/pattern-raizes.png',
+   imagem: 'assets/sabores/pattern-raizes.jpeg',
   },
   {
     nome: 'Choco & Brownie',
