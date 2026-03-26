@@ -1,39 +1,122 @@
 const saboresPascoa = [
   {
-    nome: 'Bolo de Cenoura Box',
-    desc: 'Box especial com gelato e finalização indulgente para uma experiência única de Páscoa.',
-    imagem: 'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?auto=format&fit=crop&w=1200&q=80',
+    nome: 'Bolo de Cenoura',
+    desc: 'Box em formato de cenoura, com gelato de cenoura e cobertura de brigadeiro belga. Finalizado com granulado.',
+    imagem: 'assets/pascoa/cenoura.png',
   },
   {
     nome: 'Pistache Crunchy',
-    desc: 'Gelato cremoso com notas marcantes de pistache e finalização crocante.',
-    imagem: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=1200&q=80',
+    desc: 'Casca branca, gelato de pistache e creme de pistache crunch. Finalizado com crumbs de pistache.',
+    imagem: 'assets/pascoa/pistache.png',
   },
   {
     nome: 'Bananoff',
-    desc: 'Uma combinação envolvente, cremosa e equilibrada, com toque especial da casa.',
-    imagem: 'https://images.unsplash.com/photo-1488900128323-21503983a07e?auto=format&fit=crop&w=1200&q=80',
+    desc: 'Casca branca, gelato de banana, camada de doce de leite e Biscoff®. Finalizado com crumbs de Biscoff®.',
+    imagem: 'assets/pascoa/bananoff.png',
   },
   {
     nome: 'Biscoff® Creamy',
-    desc: 'Cremoso, intenso e indulgente, pensado para quem busca uma colherada memorável.',
-    imagem: 'https://images.unsplash.com/photo-1516559828984-fb3b99548b21?auto=format&fit=crop&w=1200&q=80',
+    desc: 'Casca preta, gelato Biscoff® e creamy de Biscoff®. Finalizado com crumbs de Biscoff®.',
+    imagem: 'assets/pascoa/biscoff.png',
   },
   {
     nome: 'Chocolate Dubai',
-    desc: 'Uma proposta sofisticada, com contraste de textura e um perfil de sabor marcante.',
-    imagem: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=1200&q=80',
+    desc: 'Casca preta, gelato de chocolate belga Callebaut®, creme de pistache com kadaif. Finalizado com crumbs de pistache.',
+    imagem: 'assets/pascoa/dubai.png',
+  },
+  {
+    nome: 'Nocciola',
+    desc: 'Casca preta, gelato de creme de avelã, ganache de chocolate com avelã. Finalizado com avelã torrada.',
+    imagem: 'assets/pascoa/nocciola.png',
+  },
+  {
+    nome: 'Choco & Brownie',
+    desc: 'Casca preta, gelato de chocolate belga Callebaut® com brownie artesanal. Finalizado com pedaços de brownie.',
+    imagem: 'assets/pascoa/chocobrownie.png',
   },
 ];
 
-function createCarousel({ items, gridId, prevId, nextId }) {
+
+const saboresGelato = [
+  {
+    nome: 'Pistache',
+    desc: 'Cremoso, elegante e marcante, com aquele toque sofisticado que conquista na primeira colherada.',
+    imagem: 'assets/pattern-raizes.jpeg',
+  },
+  {
+    nome: 'Chocolate Belga',
+    desc: 'Intenso e aveludado, para quem ama um clássico com personalidade.',
+    imagem: 'assets/pattern-raizes.jpeg',
+  },
+  {
+    nome: 'Fior di Latte',
+    desc: 'Delicado, puro e perfeito para destacar a qualidade da base artesanal.',
+    imagem: 'assets/pattern-raizes.jpeg',
+  },
+  {
+    nome: 'Choco & Brownie',
+    desc: 'Um sabor envolvente, com notas intensas e textura extremamente cremosa.',
+    imagem: 'assets/pattern-raizes.jpeg',
+  },
+  {
+    nome: 'Abacate',
+    desc: 'Leve, cremosa e com o contraste perfeito entre delicadeza e crocância.',
+    imagem: 'assets/pattern-raizes.jpeg',
+  },
+  {
+    nome: 'Mango',
+    desc: 'Refrescante, vibrante e cheia de sabor, ideal para quem busca leveza.',
+    imagem: 'assets/pattern-raizes.jpeg',
+  },
+  {
+    nome: 'Fragola',
+    desc: 'Refrescante, vibrante e cheia de sabor, ideal para quem busca leveza.',
+    imagem: 'assets/pattern-raizes.jpeg',
+  },
+  {
+    nome: 'Doce de Leite',
+    desc: 'Refrescante, vibrante e cheia de sabor, ideal para quem busca leveza.',
+    imagem: 'assets/pattern-raizes.jpeg',
+  },
+  {
+    nome: 'Cocada Queimada',
+    desc: 'Refrescante, vibrante e cheia de sabor, ideal para quem busca leveza.',
+    imagem: 'assets/pattern-raizes.jpeg',
+  },
+  {
+    nome: 'Cocco',
+    desc: 'Refrescante, vibrante e cheia de sabor, ideal para quem busca leveza.',
+    imagem: 'assets/pattern-raizes.jpeg',
+  },
+  {
+    nome: 'Biscoff',
+    desc: 'Refrescante, vibrante e cheia de sabor, ideal para quem busca leveza.',
+    imagem: 'assets/pattern-raizes.jpeg',
+  },
+  {
+    nome: 'Mousse de Limão',
+    desc: 'Refrescante, vibrante e cheia de sabor, ideal para quem busca leveza.',
+    imagem: 'assets/pattern-raizes.jpeg',
+  },
+  {
+    nome: 'Maracuja & Amora',
+    desc: 'Refrescante, vibrante e cheia de sabor, ideal para quem busca leveza.',
+    imagem: 'assets/pattern-raizes.jpeg',
+  },
+  
+];
+
+function createCarousel({
+  items,
+  gridId,
+  prevId,
+  nextId
+}) {
   const grid = document.getElementById(gridId);
   const prevBtn = document.getElementById(prevId);
   const nextBtn = document.getElementById(nextId);
 
-  if (!grid || !prevBtn || !nextBtn || !Array.isArray(items) || items.length === 0) {
-    return;
-  }
+  if (!grid || !prevBtn || !nextBtn) return;
 
   grid.innerHTML = '';
 
@@ -95,71 +178,16 @@ function createCarousel({ items, gridId, prevId, nextId }) {
   updateCarousel();
 }
 
-async function carregarSaboresGelato() {
-  const response = await fetch('./sabores.json', { cache: 'no-store' });
+createCarousel({
+  items: saboresPascoa,
+  gridId: 'pascoa-grid',
+  prevId: 'pascoa-prev',
+  nextId: 'pascoa-next'
+});
 
-  if (!response.ok) {
-    throw new Error(`Não foi possível carregar sabores.json (${response.status})`);
-  }
-
-  const data = await response.json();
-
-  if (!Array.isArray(data)) {
-    throw new Error('O arquivo sabores.json não está em formato de lista');
-  }
-
-  return data.map((item) => ({
-    nome: item.nome || 'Sem nome',
-    desc: item.desc || 'Descrição em breve.',
-    imagem:
-      item.imagem ||
-      'https://images.unsplash.com/photo-1570197788417-0e82375c9371?auto=format&fit=crop&w=1000&q=80',
-  }));
-}
-
-async function iniciarPagina() {
-  createCarousel({
-    items: saboresPascoa,
-    gridId: 'pascoa-grid',
-    prevId: 'pascoa-prev',
-    nextId: 'pascoa-next',
-  });
-
-  try {
-    const saboresGelato = await carregarSaboresGelato();
-
-    createCarousel({
-      items: saboresGelato,
-      gridId: 'gelato-grid',
-      prevId: 'gelato-prev',
-      nextId: 'gelato-next',
-    });
-  } catch (error) {
-    console.error('Erro ao carregar sabores do gelato:', error);
-
-    createCarousel({
-      items: [
-        {
-          nome: 'Pistache',
-          desc: 'Cremoso, elegante e marcante, com aquele toque sofisticado que conquista na primeira colherada.',
-          imagem: 'https://images.unsplash.com/photo-1570197788417-0e82375c9371?auto=format&fit=crop&w=1000&q=80',
-        },
-        {
-          nome: 'Chocolate Belga',
-          desc: 'Intenso e aveludado, para quem ama um clássico com personalidade.',
-          imagem: 'https://images.unsplash.com/photo-1511911063855-2bf39afa5b2e?auto=format&fit=crop&w=1000&q=80',
-        },
-        {
-          nome: 'Fior di Latte',
-          desc: 'Delicado, puro e perfeito para destacar a qualidade da base artesanal.',
-          imagem: 'https://images.unsplash.com/photo-1629385701021-fcd568a74396?auto=format&fit=crop&w=1000&q=80',
-        },
-      ],
-      gridId: 'gelato-grid',
-      prevId: 'gelato-prev',
-      nextId: 'gelato-next',
-    });
-  }
-}
-
-document.addEventListener('DOMContentLoaded', iniciarPagina);
+createCarousel({
+  items: saboresGelato,
+  gridId: 'gelato-grid',
+  prevId: 'gelato-prev',
+  nextId: 'gelato-next'
+});
