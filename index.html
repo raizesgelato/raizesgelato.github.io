@@ -45,37 +45,51 @@
 
       <div class="hero-visual">
         <div class="hero-card hero-card-brand">
-          <img src="assets/ingredientes-post.jpg" alt="Material de comunicação da Raízes Gelato" />
+          <video autoplay muted loop playsinline preload="auto" poster="">
+            <source src="assets/chocolate.MOV" type="video/mp4" />
+            Seu navegador não suporta vídeo em HTML5.
+          </video>
         </div>
         <div class="floating-pattern-card" aria-hidden="true"></div>
       </div>
+
     </section>
 
     <section id="pascoa" class="section-light easter-section">
       <div class="container easter-grid">
         <div>
           <p class="eyebrow">Especial de Páscoa</p>
-          <h2>Uma edição pensada para presentear e vender muito.</h2>
-          <p class="section-copy">Crie urgência com uma vitrine sazonal no topo do site: reservas antecipadas, produção limitada e itens especiais para a Páscoa. O botão já leva direto para o pedido.</p>
+          <h2>Feito para presentear. Difícil de esquecer.</h2>
+          <p class="section-copy">Uma edição limitada que combina sabor, cuidado e apresentação premium. Perfeito para transformar a Páscoa em um momento único.</p>
           <div class="hero-actions">
-            <a class="button button-primary" href="https://instadelivery.com.br/raizesgelato" target="_blank" rel="noopener noreferrer">Reservar Páscoa</a>
-            <a class="button button-secondary" href="#instagram">Ver Instagram</a>
+            <a class="button button-primary" href="https://forms.gle/mRqacEinA2RbHjGn7" target="_blank" rel="noopener noreferrer">Reservar Páscoa</a>
+            <a class="button button-secondary" href="https://www.instagram.com/raizesgelato" target="_blank" rel="noopener noreferrer">Ver Instagram</a>
           </div>
         </div>
-
-        <div class="easter-card-wrap">
+       <div class="easter-card-wrap">
           <div class="easter-pattern"></div>
+
           <div class="easter-card">
             <span class="badge">Encomendas limitadas</span>
-            <h3>Páscoa Raízes Gelato</h3>
-            <ul>
-              <li>produção artesanal em pequenos lotes</li>
-              <li>reserva pelo InstaDelivery</li>
-              <li>apresentação premium para presentear</li>
-              <li>campanha pronta para destacar no topo do site</li>
-            </ul>
+
+            <div class="easter-photo">
+              <img src="assets/cenoura.png" alt="Especial de Páscoa Raízes Gelato" />
+            </div>
           </div>
         </div>
+      </div>
+    </section>
+    
+    <section class="sabores-section">
+      <div class="sabores-header">
+        <div class="sabores-nav">
+          <button id="pascoa-prev" aria-label="Voltar">←</button>
+          <button id="pascoa-next" aria-label="Avançar">→</button>
+        </div>
+      </div>
+
+      <div class="sabores-carousel-wrapper">
+        <div id="pascoa-grid" class="sabores-carousel"></div>
       </div>
     </section>
 
@@ -86,8 +100,9 @@
           <h2>Uma experiência pensada para encantar antes mesmo da primeira colherada.</h2>
         </div>
         <div class="intro-text">
-          <p>Raízes Gelato nasce de uma proposta simples e sofisticada: valorizar o sabor real, o cuidado artesanal e a beleza dos poucos ingredientes bem escolhidos.</p>
-          <p>Agora a página já usa seus materiais reais de comunicação, reforçando a identidade da marca e deixando a percepção muito mais profissional.</p>
+          <p>Na Raízes Gelato, acreditamos que o verdadeiro sabor está na simplicidade.
+              Selecionamos poucos ingredientes, de alta qualidade, para criar um gelato artesanal, cremoso e autêntico.</p>
+          <p>Cada lata carrega uma experiência diferente, feita para quem busca mais do que um simples sorvete.</p>
         </div>
       </div>
     </section>
@@ -127,31 +142,18 @@
           <p class="section-note">Enquanto você não me mandar as fotos dos produtos, deixei a estrutura pronta para vender. Assim que enviar as imagens reais, essa seção sobe muito de nível.</p>
         </div>
 
-        <div class="cards-grid">
-          <article class="flavor-card">
-            <div class="flavor-image flavor-pattern">
-              <div class="flavor-placeholder">Pistache</div>
-            </div>
-            <h3>Pistache</h3>
-            <p>Cremoso, elegante e marcante, com aquele toque sofisticado que conquista na primeira colherada.</p>
-          </article>
+            <section class="sabores-section">
+              <div class="sabores-header">
+                <div class="sabores-nav">
+                  <button id="gelato-prev" aria-label="Voltar">←</button>
+                  <button id="gelato-next" aria-label="Avançar">→</button>
+                </div>
+              </div>
 
-          <article class="flavor-card">
-            <div class="flavor-image flavor-pattern">
-              <div class="flavor-placeholder">Chocolate Belga</div>
-            </div>
-            <h3>Chocolate Belga</h3>
-            <p>Intenso e aveludado, para quem ama um clássico com personalidade.</p>
-          </article>
-
-          <article class="flavor-card">
-            <div class="flavor-image flavor-pattern">
-              <div class="flavor-placeholder">Fior di Latte</div>
-            </div>
-            <h3>Fior di Latte</h3>
-            <p>Delicado, puro e perfeito para destacar a qualidade da base artesanal.</p>
-          </article>
-        </div>
+              <div class="sabores-carousel-wrapper">
+                <div id="gelato-grid" class="sabores-carousel"></div>
+              </div>
+            </section>
       </div>
     </section>
 
@@ -217,5 +219,6 @@
       </div>
     </div>
   </footer>
+  <script src="script.js"></script>
 </body>
 </html>
