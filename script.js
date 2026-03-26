@@ -41,7 +41,7 @@ const saboresGelato = [
   {
     nome: 'Pistache',
     desc: 'Gelato de pistache',
-    imagem: 'assets/sabores/pistache-2.png',
+    imagem: 'assets/sabores/pistache.png',
   },
    {
     nome: 'Fragola',
