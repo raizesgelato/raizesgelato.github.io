@@ -40,67 +40,67 @@ const saboresPascoa = [
 const saboresGelato = [
   {
     nome: 'Pistache',
-    desc: 'Cremoso, elegante e marcante, com aquele toque sofisticado que conquista na primeira colherada.',
+    desc: 'Gelato de pistache',
     imagem: 'assets/sabores/pistache-2.png',
   },
    {
     nome: 'Fragola',
-    desc: 'Refrescante, vibrante e cheia de sabor, ideal para quem busca leveza.',
+    desc: 'Sorbet de morango a base de água',
     imagem: 'assets/sabores/fragola.png',
   },
   {
     nome: 'Doce de Leite',
-    desc: 'Refrescante, vibrante e cheia de sabor, ideal para quem busca leveza.',
+    desc: 'Gelato de Doce de Leite',
     imagem: 'assets/sabores/doceleite.png',
   },
     {
     nome: 'Mousse de Limão',
-    desc: 'Refrescante, vibrante e cheia de sabor, ideal para quem busca leveza.',
+    desc: 'Gelato de limão siciliano e leite condensado',
     imagem: 'assets/sabores/mousse.png',
   },
   {
     nome: 'Maracuja & Amora',
-    desc: 'Refrescante, vibrante e cheia de sabor, ideal para quem busca leveza.',
+    desc: 'Sorbet de maracujá a base de água com calda de amora',
     imagem: 'assets/sabores/maracuja.png',
   },
     {
     nome: 'Cocco',
-    desc: 'Refrescante, vibrante e cheia de sabor, ideal para quem busca leveza.',
+    desc: 'Gelato de coco e leite condensado',
     imagem: 'assets/sabores/coco.png',
   },
   {
     nome: 'Chocolate Belga',
-    desc: 'Intenso e aveludado, para quem ama um clássico com personalidade.',
+    desc: 'Gelato de Chocolate Belga',
     imagem: 'assets/pattern-raizes.jpeg',
   },
   {
     nome: 'Fior di Latte',
-    desc: 'Delicado, puro e perfeito para destacar a qualidade da base artesanal.',
+    desc: 'Gelato de Leite',
    imagem: 'assets/sabores/pattern-raizes.png',
   },
   {
     nome: 'Choco & Brownie',
-    desc: 'Um sabor envolvente, com notas intensas e textura extremamente cremosa.',
+    desc: 'Gelato de Chocolate Belga e Brownie',
     imagem: 'assets/pattern-raizes.jpeg',
   },
   {
     nome: 'Abacate',
-    desc: 'Leve, cremosa e com o contraste perfeito entre delicadeza e crocância.',
+    desc: 'Gelato de Abacate',
     imagem: 'assets/pattern-raizes.jpeg',
   },
   {
     nome: 'Mango',
-    desc: 'Refrescante, vibrante e cheia de sabor, ideal para quem busca leveza.',
+    desc: 'Sorbet de Manga a base de água',
     imagem: 'assets/pattern-raizes.jpeg',
   },
   {
     nome: 'Cocada Queimada',
-    desc: 'Refrescante, vibrante e cheia de sabor, ideal para quem busca leveza.',
+    desc: 'Gelato de coco, leite condensado e cocada queimada',
     imagem: 'assets/pattern-raizes.jpeg',
   },
   {
     nome: 'Biscoff',
-    desc: 'Refrescante, vibrante e cheia de sabor, ideal para quem busca leveza.',
+    desc: 'Gelato de Biscoito Belga com Especiarias',
     imagem: 'assets/pattern-raizes.jpeg',
   }
   
