@@ -81,27 +81,27 @@ const saboresGelato = [
   {
     nome: 'Choco & Brownie',
     desc: 'Gelato de Chocolate Belga e Brownie',
-    imagem: 'assets/chocobrownie.png',
+    imagem: 'assets/sabores/chocobrownie.png',
   },
   {
     nome: 'Abacate',
     desc: 'Gelato de Abacate',
-    imagem: 'assets/abacate.png',
+    imagem: 'assets/sabores/abacate.png',
   },
   {
     nome: 'Mango',
     desc: 'Sorbet de Manga a base de água',
-    imagem: 'assets/manga.png',
+    imagem: 'assets/sabores/manga.png',
   },
   {
     nome: 'Cocada Queimada',
     desc: 'Gelato de coco, leite condensado e cocada queimada',
-    imagem: 'assets/cocada.png',
+    imagem: 'assets/sabores/cocada.png',
   },
   {
     nome: 'Biscoff',
     desc: 'Gelato de Biscoito Belga com Especiarias',
-    imagem: 'assets/biscoff.png',
+    imagem: 'assets/sabores/biscoff.png',
   }
   
 ];
