@@ -71,7 +71,7 @@ const saboresGelato = [
   {
     nome: 'Chocolate Belga',
     desc: 'Gelato de Chocolate Belga',
-    imagem: 'assets/belga.png',
+    imagem: 'assets/sabores/belga.png',
   },
   {
     nome: 'Fior di Latte',
