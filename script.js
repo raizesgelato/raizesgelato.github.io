@@ -133,18 +133,6 @@ function createCarousel({
     grid.appendChild(card);
   });
 
-  let currentIndex = 0;
-  let isDragging = false;
-  let startX = 0;
-  let currentX = 0;
-  let startTranslate = 0;
-
-  function getCardsPerView() {
-    if (window.innerWidth < 768) return 1;
-    if (window.innerWidth < 1100) return 2;
-    return 3;
-  }
-
   function getGap() {
     const styles = window.getComputedStyle(grid);
     return parseInt(styles.gap || styles.columnGap || '32', 10) || 32;
@@ -159,95 +147,93 @@ function createCarousel({
     return getCardWidth() + getGap();
   }
 
-  function getMaxIndex() {
-    return Math.max(0, items.length - getCardsPerView());
+  function getMaxScroll() {
+    return grid.scrollWidth - grid.clientWidth;
   }
 
-  function updateCarousel(withAnimation = true) {
-    const offset = currentIndex * getStepWidth();
-    grid.style.transition = withAnimation ? 'transform 0.45s ease' : 'none';
-    grid.style.transform = `translate3d(-${offset}px, 0, 0)`;
+  function scrollNext() {
+    const step = getStepWidth();
+    const maxScroll = getMaxScroll();
+    const next = grid.scrollLeft + step;
+
+    if (next >= maxScroll - 5) {
+      grid.scrollTo({ left: 0, behavior: 'smooth' });
+    } else {
+      grid.scrollBy({ left: step, behavior: 'smooth' });
+    }
   }
 
-  function nextSlide() {
-    const maxIndex = getMaxIndex();
-    currentIndex = currentIndex >= maxIndex ? 0 : currentIndex + 1;
-    updateCarousel(true);
+  function scrollPrev() {
+    const step = getStepWidth();
+    const maxScroll = getMaxScroll();
+    const prev = grid.scrollLeft - step;
+
+    if (prev <= 5) {
+      grid.scrollTo({ left: maxScroll, behavior: 'smooth' });
+    } else {
+      grid.scrollBy({ left: -step, behavior: 'smooth' });
+    }
   }
 
-  function prevSlide() {
-    const maxIndex = getMaxIndex();
-    currentIndex = currentIndex <= 0 ? maxIndex : currentIndex - 1;
-    updateCarousel(true);
-  }
+  prevBtn.addEventListener('click', scrollPrev);
+  nextBtn.addEventListener('click', scrollNext);
 
-  nextBtn.addEventListener('click', nextSlide);
-  prevBtn.addEventListener('click', prevSlide);
+  let isDown = false;
+  let startX = 0;
+  let startScrollLeft = 0;
 
-  function onPointerDown(e) {
-    if (e.pointerType === 'mouse' && e.button !== 0) return;
-
-    isDragging = true;
-    startX = e.clientX;
-    currentX = e.clientX;
-    startTranslate = -(currentIndex * getStepWidth());
-
-    grid.style.transition = 'none';
+  function pointerDown(e) {
+    isDown = true;
     grid.classList.add('dragging');
-
-    try {
-      grid.setPointerCapture(e.pointerId);
-    } catch (_) {}
+    startX = e.pageX ?? e.clientX;
+    startScrollLeft = grid.scrollLeft;
   }
 
-  function onPointerMove(e) {
-    if (!isDragging) return;
-
-    currentX = e.clientX;
-    const deltaX = currentX - startX;
-    const translate = startTranslate + deltaX;
-    grid.style.transform = `translate3d(${translate}px, 0, 0)`;
+  function pointerMove(e) {
+    if (!isDown) return;
+    const x = e.pageX ?? e.clientX;
+    const walk = x - startX;
+    grid.scrollLeft = startScrollLeft - walk;
   }
 
-  function onPointerEnd(e) {
-    if (!isDragging) return;
-
-    isDragging = false;
+  function pointerUp() {
+    if (!isDown) return;
+    isDown = false;
     grid.classList.remove('dragging');
 
-    const deltaX = currentX - startX;
-    const threshold = Math.min(100, getCardWidth() * 0.2);
-
-    if (deltaX < -threshold) {
-      const maxIndex = getMaxIndex();
-      currentIndex = currentIndex >= maxIndex ? 0 : currentIndex + 1;
-    } else if (deltaX > threshold) {
-      const maxIndex = getMaxIndex();
-      currentIndex = currentIndex <= 0 ? maxIndex : currentIndex - 1;
-    }
-
-    try {
-      grid.releasePointerCapture(e.pointerId);
-    } catch (_) {}
-
-    updateCarousel(true);
+    const step = getStepWidth();
+    const snapped = Math.round(grid.scrollLeft / step) * step;
+    grid.scrollTo({ left: snapped, behavior: 'smooth' });
   }
 
-  grid.addEventListener('pointerdown', onPointerDown);
-  grid.addEventListener('pointermove', onPointerMove);
-  grid.addEventListener('pointerup', onPointerEnd);
-  grid.addEventListener('pointercancel', onPointerEnd);
-  grid.addEventListener('lostpointercapture', onPointerEnd);
+  grid.addEventListener('mousedown', pointerDown);
+  grid.addEventListener('mousemove', pointerMove);
+  grid.addEventListener('mouseup', pointerUp);
+  grid.addEventListener('mouseleave', pointerUp);
 
-  grid.addEventListener('dragstart', (e) => e.preventDefault());
+  grid.addEventListener('touchstart', (e) => {
+    const touch = e.touches[0];
+    isDown = true;
+    startX = touch.clientX;
+    startScrollLeft = grid.scrollLeft;
+    grid.classList.add('dragging');
+  }, { passive: true });
+
+  grid.addEventListener('touchmove', (e) => {
+    if (!isDown) return;
+    const touch = e.touches[0];
+    const walk = touch.clientX - startX;
+    grid.scrollLeft = startScrollLeft - walk;
+  }, { passive: true });
+
+  grid.addEventListener('touchend', pointerUp);
+  grid.addEventListener('touchcancel', pointerUp);
 
   window.addEventListener('resize', () => {
-    const maxIndex = getMaxIndex();
-    if (currentIndex > maxIndex) currentIndex = maxIndex;
-    updateCarousel(false);
+    const step = getStepWidth();
+    const snapped = Math.round(grid.scrollLeft / step) * step;
+    grid.scrollTo({ left: snapped, behavior: 'auto' });
   });
-
-  updateCarousel(false);
 }
 
 createCarousel({
