@@ -13,25 +13,40 @@
 
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="#topo" class="brand" aria-label="Raízes Gelato">
-        <img src="assets/logo.png" alt="Raízes Gelato" class="brand-logo" />
-      </a>
+    <header class="site-header">
+      <div class="container header-inner">
 
-      <nav class="nav desktop-nav" aria-label="Principal">
-        <a href="#pascoa">Páscoa</a>
-        <a href="#sobre">Sobre</a>
-        <a href="#ingredientes">Ingredientes</a>
-        <a href="#sabores">Sabores</a>
-        <a href="#horarios">Horários</a>
-        <a href="#sustentavel">Sustentável</a>
-        <a href="#eventos">Eventos</a>
-      </nav>
+        <a href="#topo" class="brand">
+          <img src="assets/logo.png" alt="Raízes Gelato" class="brand-logo" />
+        </a>
 
-      <a class="button button-outline" href="https://instadelivery.com.br/raizesgelato" target="_blank" rel="noopener noreferrer">Fazer pedido</a>
-    </div>
-  </header>
+        <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <nav id="mobile-menu" class="nav desktop-nav" aria-label="Principal">
+          <a href="#pascoa">Páscoa</a>
+          <a href="#sobre">Sobre</a>
+          <a href="#ingredientes">Ingredientes</a>
+          <a href="#sabores">Sabores</a>
+          <a href="#horarios">Horários</a>
+          <a href="#sustentavel">Sustentável</a>
+          <a href="#eventos">Eventos</a>
+          <!-- <a class="button button-primary mobile-order-btn" href="https://instadelivery.com.br/raizesgelato" target="_blank" rel="noopener noreferrer">Fazer pedido</a> -->
+        </nav>
+
+        <a class="button button-outline header-order-desktop"
+          href="https://instadelivery.com.br/raizesgelato"
+          target="_blank">
+          Fazer pedido
+        </a>
+
+      </div>
+    </header>
+
+    <div id="menu-overlay" class="menu-overlay"></div>
 
   <main id="topo">
     <section class="hero container">

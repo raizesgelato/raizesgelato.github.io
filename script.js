@@ -125,7 +125,7 @@ function createCarousel({
     card.className = 'sabor-card';
     card.innerHTML = `
       <div class="sabor-card-image">
-        <img src="${item.imagem}" alt="${item.nome}" />
+        <img src="${item.imagem}" alt="${item.nome}" draggable="false" />
       </div>
       <h3>${item.nome}</h3>
       <p>${item.desc}</p>
@@ -134,6 +134,11 @@ function createCarousel({
   });
 
   let currentIndex = 0;
+  let startX = 0;
+  let currentTranslate = 0;
+  let prevTranslate = 0;
+  let isDragging = false;
+  let animationId = 0;
 
   function getCardsPerView() {
     if (window.innerWidth < 768) return 1;
@@ -141,41 +146,118 @@ function createCarousel({
     return 3;
   }
 
+  function getGap() {
+    const styles = window.getComputedStyle(grid);
+    return parseInt(styles.gap || styles.columnGap || '32', 10) || 32;
+  }
+
+  function getCardWidth() {
+    const firstCard = grid.querySelector('.sabor-card');
+    return firstCard ? firstCard.offsetWidth : 0;
+  }
+
+  function getStepWidth() {
+    return getCardWidth() + getGap();
+  }
+
   function getMaxIndex() {
     const cardsPerView = getCardsPerView();
     return Math.max(0, items.length - cardsPerView);
   }
 
-  function updateCarousel() {
-    const firstCard = grid.querySelector('.sabor-card');
-    if (!firstCard) return;
+  function setPositionByIndex(withAnimation = true) {
+    const stepWidth = getStepWidth();
+    currentTranslate = currentIndex * -stepWidth;
+    prevTranslate = currentTranslate;
 
-    const cardWidth = firstCard.offsetWidth;
-    const gap = 32;
-    const offset = currentIndex * (cardWidth + gap);
-
-    grid.style.transform = `translateX(-${offset}px)`;
+    grid.style.transition = withAnimation ? 'transform 0.45s ease' : 'none';
+    grid.style.transform = `translateX(${currentTranslate}px)`;
   }
 
-  nextBtn.addEventListener('click', () => {
+  function nextSlide() {
     const maxIndex = getMaxIndex();
     currentIndex = currentIndex >= maxIndex ? 0 : currentIndex + 1;
-    updateCarousel();
-  });
+    setPositionByIndex(true);
+  }
 
-  prevBtn.addEventListener('click', () => {
+  function prevSlide() {
     const maxIndex = getMaxIndex();
     currentIndex = currentIndex <= 0 ? maxIndex : currentIndex - 1;
-    updateCarousel();
-  });
+    setPositionByIndex(true);
+  }
+
+  nextBtn.addEventListener('click', nextSlide);
+  prevBtn.addEventListener('click', prevSlide);
+
+  function animation() {
+    grid.style.transform = `translateX(${currentTranslate}px)`;
+    if (isDragging) {
+      animationId = requestAnimationFrame(animation);
+    }
+  }
+
+  function getPositionX(event) {
+    return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+  }
+
+  function dragStart(event) {
+    if (event.type === 'mousedown' && event.button !== 0) return;
+
+    isDragging = true;
+    startX = getPositionX(event);
+    grid.style.transition = 'none';
+    grid.classList.add('dragging');
+
+    animationId = requestAnimationFrame(animation);
+  }
+
+  function dragMove(event) {
+    if (!isDragging) return;
+
+    const currentPosition = getPositionX(event);
+    const diff = currentPosition - startX;
+    currentTranslate = prevTranslate + diff;
+  }
+
+  function dragEnd() {
+    if (!isDragging) return;
+
+    isDragging = false;
+    cancelAnimationFrame(animationId);
+    grid.classList.remove('dragging');
+
+    const movedBy = currentTranslate - prevTranslate;
+    const threshold = Math.min(120, getCardWidth() * 0.2);
+    const maxIndex = getMaxIndex();
+
+    if (movedBy < -threshold) {
+      currentIndex = currentIndex >= maxIndex ? 0 : currentIndex + 1;
+    } else if (movedBy > threshold) {
+      currentIndex = currentIndex <= 0 ? maxIndex : currentIndex - 1;
+    }
+
+    setPositionByIndex(true);
+  }
+
+  grid.addEventListener('touchstart', dragStart, { passive: true });
+  grid.addEventListener('touchmove', dragMove, { passive: true });
+  grid.addEventListener('touchend', dragEnd);
+  grid.addEventListener('touchcancel', dragEnd);
+
+  grid.addEventListener('mousedown', dragStart);
+  grid.addEventListener('mousemove', dragMove);
+  grid.addEventListener('mouseup', dragEnd);
+  grid.addEventListener('mouseleave', dragEnd);
+
+  grid.addEventListener('dragstart', (e) => e.preventDefault());
 
   window.addEventListener('resize', () => {
     const maxIndex = getMaxIndex();
     if (currentIndex > maxIndex) currentIndex = maxIndex;
-    updateCarousel();
+    setPositionByIndex(false);
   });
 
-  updateCarousel();
+  setPositionByIndex(false);
 }
 
 createCarousel({
@@ -190,4 +272,60 @@ createCarousel({
   gridId: 'gelato-grid',
   prevId: 'gelato-prev',
   nextId: 'gelato-next'
+});
+
+const toggle = document.getElementById('menu-toggle');
+const menu = document.getElementById('mobile-menu');
+const overlay = document.getElementById('menu-overlay');
+
+function openMenu() {
+  menu.classList.add('active');
+  overlay.classList.add('active');
+  toggle.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMenu() {
+  menu.classList.remove('active');
+  overlay.classList.remove('active');
+  toggle.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+toggle.addEventListener('click', (e) => {
+  e.stopPropagation();
+
+  if (menu.classList.contains('active')) {
+    closeMenu();
+  } else {
+    openMenu();
+  }
+});
+
+/* evita clique fechar quando dentro do menu */
+menu.addEventListener('click', (e) => {
+  e.stopPropagation();
+});
+
+/* clicar fora fecha */
+overlay.addEventListener('click', closeMenu);
+
+/* links funcionam */
+document.querySelectorAll('#mobile-menu a').forEach(link => {
+  link.addEventListener('click', (e) => {
+    const href = link.getAttribute('href');
+
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      closeMenu();
+
+      setTimeout(() => {
+        document.querySelector(href)?.scrollIntoView({
+          behavior: 'smooth'
+        });
+      }, 200);
+    } else {
+      closeMenu();
+    }
+  });
 });
