@@ -134,11 +134,10 @@ function createCarousel({
   });
 
   let currentIndex = 0;
-  let startX = 0;
-  let currentTranslate = 0;
-  let prevTranslate = 0;
   let isDragging = false;
-  let animationId = 0;
+  let startX = 0;
+  let currentX = 0;
+  let startTranslate = 0;
 
   function getCardsPerView() {
     if (window.innerWidth < 768) return 1;
@@ -161,103 +160,94 @@ function createCarousel({
   }
 
   function getMaxIndex() {
-    const cardsPerView = getCardsPerView();
-    return Math.max(0, items.length - cardsPerView);
+    return Math.max(0, items.length - getCardsPerView());
   }
 
-  function setPositionByIndex(withAnimation = true) {
-    const stepWidth = getStepWidth();
-    currentTranslate = currentIndex * -stepWidth;
-    prevTranslate = currentTranslate;
-
+  function updateCarousel(withAnimation = true) {
+    const offset = currentIndex * getStepWidth();
     grid.style.transition = withAnimation ? 'transform 0.45s ease' : 'none';
-    grid.style.transform = `translateX(${currentTranslate}px)`;
+    grid.style.transform = `translate3d(-${offset}px, 0, 0)`;
   }
 
   function nextSlide() {
     const maxIndex = getMaxIndex();
     currentIndex = currentIndex >= maxIndex ? 0 : currentIndex + 1;
-    setPositionByIndex(true);
+    updateCarousel(true);
   }
 
   function prevSlide() {
     const maxIndex = getMaxIndex();
     currentIndex = currentIndex <= 0 ? maxIndex : currentIndex - 1;
-    setPositionByIndex(true);
+    updateCarousel(true);
   }
 
   nextBtn.addEventListener('click', nextSlide);
   prevBtn.addEventListener('click', prevSlide);
 
-  function animation() {
-    grid.style.transform = `translateX(${currentTranslate}px)`;
-    if (isDragging) {
-      animationId = requestAnimationFrame(animation);
-    }
-  }
-
-  function getPositionX(event) {
-    return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
-  }
-
-  function dragStart(event) {
-    if (event.type === 'mousedown' && event.button !== 0) return;
+  function onPointerDown(e) {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
 
     isDragging = true;
-    startX = getPositionX(event);
+    startX = e.clientX;
+    currentX = e.clientX;
+    startTranslate = -(currentIndex * getStepWidth());
+
     grid.style.transition = 'none';
     grid.classList.add('dragging');
 
-    animationId = requestAnimationFrame(animation);
+    try {
+      grid.setPointerCapture(e.pointerId);
+    } catch (_) {}
   }
 
-  function dragMove(event) {
+  function onPointerMove(e) {
     if (!isDragging) return;
 
-    const currentPosition = getPositionX(event);
-    const diff = currentPosition - startX;
-    currentTranslate = prevTranslate + diff;
+    currentX = e.clientX;
+    const deltaX = currentX - startX;
+    const translate = startTranslate + deltaX;
+    grid.style.transform = `translate3d(${translate}px, 0, 0)`;
   }
 
-  function dragEnd() {
+  function onPointerEnd(e) {
     if (!isDragging) return;
 
     isDragging = false;
-    cancelAnimationFrame(animationId);
     grid.classList.remove('dragging');
 
-    const movedBy = currentTranslate - prevTranslate;
-    const threshold = Math.min(120, getCardWidth() * 0.2);
-    const maxIndex = getMaxIndex();
+    const deltaX = currentX - startX;
+    const threshold = Math.min(100, getCardWidth() * 0.2);
 
-    if (movedBy < -threshold) {
+    if (deltaX < -threshold) {
+      const maxIndex = getMaxIndex();
       currentIndex = currentIndex >= maxIndex ? 0 : currentIndex + 1;
-    } else if (movedBy > threshold) {
+    } else if (deltaX > threshold) {
+      const maxIndex = getMaxIndex();
       currentIndex = currentIndex <= 0 ? maxIndex : currentIndex - 1;
     }
 
-    setPositionByIndex(true);
+    try {
+      grid.releasePointerCapture(e.pointerId);
+    } catch (_) {}
+
+    updateCarousel(true);
   }
 
-  grid.addEventListener('touchstart', dragStart, { passive: true });
-  grid.addEventListener('touchmove', dragMove, { passive: true });
-  grid.addEventListener('touchend', dragEnd);
-  grid.addEventListener('touchcancel', dragEnd);
-
-  grid.addEventListener('mousedown', dragStart);
-  grid.addEventListener('mousemove', dragMove);
-  grid.addEventListener('mouseup', dragEnd);
-  grid.addEventListener('mouseleave', dragEnd);
+  grid.addEventListener('pointerdown', onPointerDown);
+  grid.addEventListener('pointermove', onPointerMove);
+  grid.addEventListener('pointerup', onPointerEnd);
+  grid.addEventListener('pointercancel', onPointerEnd);
+  grid.addEventListener('lostpointercapture', onPointerEnd);
 
   grid.addEventListener('dragstart', (e) => e.preventDefault());
 
   window.addEventListener('resize', () => {
     const maxIndex = getMaxIndex();
     if (currentIndex > maxIndex) currentIndex = maxIndex;
-    setPositionByIndex(false);
+    updateCarousel(false);
   });
 
-  setPositionByIndex(false);
+  updateCarousel(false);
 }
 
 createCarousel({
