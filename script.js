@@ -36,8 +36,41 @@ const saboresPascoa = [
   },
 ];
 
+const saboresEspeciais = [
+  {
+    nome: 'Frutas Vermelhas',
+    desc: 'Gelato de Cheesecake Coberto com Calda de Frutas Vermelhas.',
+    imagem: 'assets/trilogia-ck/frutasvermelhas.png',
+  },
+   {
+    nome: 'Maracujá',
+    desc: 'Gelato de Cheesecake Coberto com Caramelo de Maracujá.',
+    imagem: 'assets/trilogia-ck/maracuja.png',
+  },
+   {
+    nome: 'Goiabada',
+    desc: 'Gelato de Cheesecake Coberto com Calda de Goiabada Cascão.',
+    imagem: 'assets/trilogia-ck/goiabada.png',
+  },
+];
+
 
 const saboresGelato = [
+  {
+    nome: 'Cheesecake de Maracujá',
+    desc: 'Gelato de Cheesecake de Maracuja',
+    imagem: 'assets/sabores/ck-maracuja.png',
+  },
+  {
+    nome: 'Cheesecake de Frutas Vermelhas',
+    desc: 'Gelato de Cheesecake de Frutas Vermelhas',
+    imagem: 'assets/sabores/ck-fv.png',
+  },
+  {
+    nome: 'Cheesecake de Goiabada',
+    desc: 'Gelato de Cheesecake de Goiabada',
+    imagem: 'assets/sabores/ck-goiabada.png',
+  },
   {
     nome: 'Pistache',
     desc: 'Gelato de pistache',
@@ -241,6 +274,13 @@ createCarousel({
   gridId: 'pascoa-grid',
   prevId: 'pascoa-prev',
   nextId: 'pascoa-next'
+});
+
+createCarousel({
+  items: saboresEspeciais,
+  gridId: 'especial-grid',
+  prevId: 'especial-prev',
+  nextId: 'especial-next'
 });
 
 createCarousel({
